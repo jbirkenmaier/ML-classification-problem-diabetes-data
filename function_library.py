@@ -30,5 +30,10 @@ As the provided data is mostly binary, with exception of the patient age, featur
 I will see if that is true later in the progress of the project. For now I will leave out feature scaling.
 '''
 
+#function for gradient descent
 def gradient_descent():
+    pass
+
+#function for model
+def model():
     pass
