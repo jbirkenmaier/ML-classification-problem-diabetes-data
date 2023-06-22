@@ -14,6 +14,7 @@ The "Training-set" will be used for training the algorithm. The "Testing-set" wi
 I will assign 75% of the dataset for training purposes and 25% for testing.
 '''
 
+#function for splitting the data into "training-" and "testing-" data
 def split_training_testing(data):
     num_of_examples = len(data)
     num_of_training_examples = 3 * num_of_examples//4
@@ -28,3 +29,6 @@ def split_training_testing(data):
 As the provided data is mostly binary, with exception of the patient age, feature scaling might not be necessary.
 I will see if that is true later in the progress of the project. For now I will leave out feature scaling.
 '''
+
+def gradient_descent():
+    pass
