@@ -21,7 +21,10 @@ def split_training_testing(data):
     
     training_data = data[:num_of_training_examples]
     test_data = data[num_of_training_examples:]
-
+    
     return training_data, test_data
 
-    
+'''
+As the provided data is mostly binary, with exception of the patient age, feature scaling might not be necessary.
+I will see if that is true later in the progress of the project. For now I will leave out feature scaling.
+'''
