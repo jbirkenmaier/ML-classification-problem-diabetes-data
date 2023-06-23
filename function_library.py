@@ -8,7 +8,9 @@ def read_data(name_of_file):
         for line in datafile:
             data.append(line.replace('\n', '').split(','))
             class_data.append(data[-1][-1])
-        return data, attributes, class_data
+    class_data = [int(element.replace('Positive', '1').replace('Negative', '0')) for element in class_data]
+    
+    return data, attributes, class_data
     
 '''    
 now I want to slice the data into a "Training-set" and a "Testing-set"
