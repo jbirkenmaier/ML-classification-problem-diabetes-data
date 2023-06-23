@@ -2,11 +2,13 @@
 #function for reading the data 
 def read_data(name_of_file):
     data=[]
+    class_data=[]
     with open('%s'%name_of_file) as datafile:
-        attributes = datafile.readline().replace('\n', '').split(',') 
+        attributes = datafile.readline().replace('\n', '').split(',')[:-1]
         for line in datafile:
             data.append(line.replace('\n', '').split(','))
-        return data, attributes
+            class_data.append(data[-1][-1])
+        return data, attributes, class_data
     
 '''    
 now I want to slice the data into a "Training-set" and a "Testing-set"
