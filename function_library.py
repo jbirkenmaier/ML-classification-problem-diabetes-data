@@ -3,7 +3,7 @@
 def read_data(name_of_file):
     data=[]
     with open('%s'%name_of_file) as datafile:
-        attributes = datafile.readline().split() 
+        attributes = datafile.readline().replace('\n', '').split(',') 
         for line in datafile:
             data.append(line.replace('\n', '').split(','))
         return data, attributes
@@ -32,6 +32,7 @@ I will see if that is true later in the progress of the project. For now I will 
 
 #function for gradient descent
 def gradient_descent():
+    
     pass
 
 #function for model
