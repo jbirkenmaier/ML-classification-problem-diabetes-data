@@ -42,8 +42,7 @@ def sig(value):
     return 1/(1+np.exp(-value))
 
 def loss(w,b,x,y):
-
-    z = np.dot(w,x) + b
+    z = model_function(x,w,b)
     d = sig(model_estimate)
     if y == 1:
         return -np.log(d)
