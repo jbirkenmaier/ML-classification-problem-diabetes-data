@@ -43,7 +43,7 @@ def sig(value):
 
 def loss(w,b,x,y):
     z = model_function(x,w,b)
-    d = sig(model_estimate)
+    d = sig(z)
     if y == 1:
         return -np.log(d)
     if y == 0:
