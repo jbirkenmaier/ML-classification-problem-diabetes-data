@@ -72,10 +72,41 @@ def derivative_of_cost(w,b,x,y,lamb):
     return dJ_dw/m, dJ/db/m
 
 #function for gradient descent
-def gradient_descent():
-    
-    pass
+def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10e-04):
+    '''
+    This function calculates the gradient descent to find the optimal
+    values for the parameters
+    '''
+    '''
+    #w_tmp=w
+    #n=len(w)
+    '''
+    m = len(x)#############
+    w = np.array(w)
+    w_tmp = w
+    b_tmp = b
 
-#function for model
-def model():
-    pass
+    '''
+    n = len(w)
+    l=0
+    '''
+    cost_tmp=1
+
+    print('called')
+
+    for k in range(steps): 
+        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0] #HIER LIEGT DER FEHLER! DERIVATIVE OF COST MUSS EINE SUMME SEIN! 
+        b_tmp = b_tmp -alpha*derivative_of_cost(w, b, x, y, lamb)[1]
+        w=w_tmp
+        b=b_tmp
+
+        cst = cost(w, b, x, y)
+        J_diff = cost_tmp - cst
+        #print(cst, '  ,  ', J_diff)
+        if J_diff <= epsilon:
+            #print('convergence!')
+            break
+
+        cost_tmp = cst
+    return w, b
+
