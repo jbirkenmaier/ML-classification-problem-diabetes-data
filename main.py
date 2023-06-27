@@ -6,6 +6,8 @@ import numpy as np
 num_of_attributes = len(attributes)
 (x_train, y_train, x_test, y_test)= (fl.split_training_testing(data))
 
+print(x_train)
+
 w = np.zeros(num_of_attributes)
 b = 1
 

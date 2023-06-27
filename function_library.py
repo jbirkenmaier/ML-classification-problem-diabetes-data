@@ -11,6 +11,8 @@ def read_data(name_of_file):
             class_data.append(data[-1][-1])
     class_data = [int(element.replace('Positive', '1').replace('Negative', '0')) for element in class_data]
     data_without_class = [element[:-1] for element in data]
+    for i in range(len(data)):
+        data[i] = [int(element.replace('Male','0').replace('Female','1').replace('No','0').replace('Yes','1').replace('Positive','1').replace('Negative','0')) for element in data[i]]
     return data, data_without_class, attributes, class_data
     
 '''    
@@ -28,11 +30,9 @@ def split_training_testing(data):
     training_data = data[:num_of_training_examples]
     x_train = [element[:-1] for element in training_data]
     y_train = [element[-1] for element in training_data]
-    y_train = [int(element.replace('Positive', '1').replace('Negative', '0')) for element in y_train]
     test_data = data[num_of_training_examples:]
     x_test = [element[:-1] for element in test_data]
     y_test = [element[-1] for element in test_data]
-    y_test = [int(element.replace('Positive', '1').replace('Negative', '0')) for element in y_test]
     
     return x_train, y_train, x_test, y_test
 
