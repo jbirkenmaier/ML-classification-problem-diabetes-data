@@ -26,9 +26,15 @@ def split_training_testing(data):
     num_of_test_examples = num_of_examples - num_of_training_examples
     
     training_data = data[:num_of_training_examples]
+    x_train = [element[:-1] for element in training_data]
+    y_train = [element[-1] for element in training_data]
+    y_train = [int(element.replace('Positive', '1').replace('Negative', '0')) for element in y_train]
     test_data = data[num_of_training_examples:]
+    x_test = [element[:-1] for element in test_data]
+    y_test = [element[-1] for element in test_data]
+    y_test = [int(element.replace('Positive', '1').replace('Negative', '0')) for element in y_test]
     
-    return training_data, test_data
+    return x_train, y_train, x_test, y_test
 
 '''
 As the provided data is mostly binary, with exception of the patient age, feature scaling might not be necessary.
@@ -95,7 +101,7 @@ def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10
     print('called')
 
     for k in range(steps): 
-        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0] #HIER LIEGT DER FEHLER! DERIVATIVE OF COST MUSS EINE SUMME SEIN! 
+        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0]  
         b_tmp = b_tmp -alpha*derivative_of_cost(w, b, x, y, lamb)[1]
         w=w_tmp
         b=b_tmp
