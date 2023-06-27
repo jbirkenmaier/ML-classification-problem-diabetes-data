@@ -53,7 +53,7 @@ def loss(w,b,x,y):
     if y == 1:
         return -np.log(d)
     if y == 0:
-        return -np.log(1-f)
+        return -np.log(1-d)
 
 def cost(x,w,b,y):
     m=len(x)
@@ -75,7 +75,7 @@ def derivative_of_cost(w,b,x,y,lamb):
     dJ_dw = np.dot(loss_list, x_list) + lamb /m*w
     dJ_db = np.sum(loss_list)
 
-    return dJ_dw/m, dJ/db/m
+    return dJ_dw/m, dJ_db/m
 
 #function for gradient descent
 def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10e-04):
@@ -108,6 +108,8 @@ def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10
 
         cst = cost(w, b, x, y)
         J_diff = cost_tmp - cst
+
+        print(J_diff)
         #print(cst, '  ,  ', J_diff)
         if J_diff <= epsilon:
             #print('convergence!')
