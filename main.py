@@ -10,3 +10,11 @@ w = np.zeros(num_of_attributes)
 b = 1
 
 results = fl.gradient_descent(w, b, x_train, y_train, lamb=10e4, alpha=pow(10,-5), steps=10000)
+
+print(results[0])
+
+'''
+Now that we obtained the values for our model (results[0] is w and results[1] is b) we need to
+hold the model to test.
+Therefore we need to use the test datasets we created in the beginning.
+''' 
