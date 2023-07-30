@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 #function for reading the data 
 def read_data(name_of_file):
@@ -48,21 +49,31 @@ def sig(value):
     return 1/(1+np.exp(-value))
 
 def loss(w,b,x,y):
-    z = model_function(x,w,b)
+    #print('CALLED LOSS')
+    z = model_function(x,w,b) #model function gives always 1, obviously wrong...
+    #print(type(x), type(w), type(b), type(z))
     d = sig(z)
+    #print('return value is: ---->')
     if y == 1:
-        return -np.log(d)
+        return float(-math.log(d))
     if y == 0:
-        return -np.log(1-d)
+        #print(-np.log(1-d))
+        return float(-math.log(1-d))
 
 def cost(x,w,b,y):
+    #print('CALLED COST')
+    #print('x is: ->>>>>> ' + str(x))
+    #print('y is: ->>>>>> ' + str(y))
     m=len(x)
     J=0
     for i in range(m):
         J+=loss(w,b,x[i],y[i])
-    return J/m
+
+    #print('J is: ----> ' + str(J))
+    return J/m #J is a list instead of a loss....
 
 def derivative_of_cost(w,b,x,y,lamb):
+    #print('CALLED DERIVATIVE OF COST')
     m = len(x)
     n = len(w)
 
@@ -101,18 +112,21 @@ def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10
     print('called')
 
     for k in range(steps): 
-        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0]  
-        b_tmp = b_tmp -alpha*derivative_of_cost(w, b, x, y, lamb)[1]
+        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0]  #Liste
+        b_tmp = b_tmp -alpha*derivative_of_cost(w, b, x, y, lamb)[1] #scalar
         w=w_tmp
         b=b_tmp
 
-        cst = cost(w, b, x, y)
+        #print(type(w), type(b), type(x), type(y))
+        cst = cost(x, w, b, y) #hier kommt es zum fehler
+    
+        #print(cst)
         J_diff = cost_tmp - cst
 
-        print(J_diff)
-        #print(cst, '  ,  ', J_diff)
+        #print(J_diff)
+        print(cst, '  ,  ', J_diff)
         if J_diff <= epsilon:
-            #print('convergence!')
+            print('convergence!')
             break
 
         cost_tmp = cst
