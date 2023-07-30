@@ -49,31 +49,21 @@ def sig(value):
     return 1/(1+np.exp(-value))
 
 def loss(w,b,x,y):
-    #print('CALLED LOSS')
-    z = model_function(x,w,b) #model function gives always 1, obviously wrong...
-    #print(type(x), type(w), type(b), type(z))
+    z = model_function(x,w,b) 
     d = sig(z)
-    #print('return value is: ---->')
     if y == 1:
         return float(-math.log(d))
     if y == 0:
-        #print(-np.log(1-d))
         return float(-math.log(1-d))
 
 def cost(x,w,b,y):
-    #print('CALLED COST')
-    #print('x is: ->>>>>> ' + str(x))
-    #print('y is: ->>>>>> ' + str(y))
     m=len(x)
     J=0
     for i in range(m):
         J+=loss(w,b,x[i],y[i])
-
-    #print('J is: ----> ' + str(J))
-    return J/m #J is a list instead of a loss....
+    return J/m 
 
 def derivative_of_cost(w,b,x,y,lamb):
-    #print('CALLED DERIVATIVE OF COST')
     m = len(x)
     n = len(w)
 
@@ -98,7 +88,7 @@ def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10
     #w_tmp=w
     #n=len(w)
     '''
-    m = len(x)#############
+    m = len(x)
     w = np.array(w)
     w_tmp = w
     b_tmp = b
@@ -112,18 +102,14 @@ def gradient_descent(w, b, x, y, lamb=10e7, alpha=pow(10,-1),steps=1, epsilon=10
     print('called')
 
     for k in range(steps): 
-        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0]  #Liste
-        b_tmp = b_tmp -alpha*derivative_of_cost(w, b, x, y, lamb)[1] #scalar
+        w_tmp = w_tmp-alpha*derivative_of_cost(w, b, x, y, lamb)[0]  
+        b_tmp = b_tmp -alpha*derivative_of_cost(w, b, x, y, lamb)[1] 
         w=w_tmp
         b=b_tmp
 
-        #print(type(w), type(b), type(x), type(y))
-        cst = cost(x, w, b, y) #hier kommt es zum fehler
-    
-        #print(cst)
+        cst = cost(x, w, b, y)
         J_diff = cost_tmp - cst
 
-        #print(J_diff)
         print(cst, '  ,  ', J_diff)
         if J_diff <= epsilon:
             print('convergence!')
