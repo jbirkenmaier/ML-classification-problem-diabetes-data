@@ -39,6 +39,7 @@ for i in range(len(y_test)):
         true +=1
     else:
         false +=1
+        
 print(true/len(y_test))
 
 '''
